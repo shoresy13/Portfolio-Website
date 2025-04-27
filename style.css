@@ -5,15 +5,60 @@
   letter-spacing: 1px;
 }
 
+/* Body section */
 html,
 body {
   height: 100%;
   overflow: hidden;
 }
-
 body {
   background: rgb(35, 35, 35);
   color: white;
+}
+
+/* Navbar */
+.navbar {
+  padding: 1rem;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: auto;
+  z-index: 1000;
+}
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.navbar-links {
+  list-style-type: none;
+  display: flex;
+  gap: 1rem;
+}
+.navbar-links li {
+  display: inline-block;
+}
+.navbar-links a {
+  color: white;
+  text-decoration: none;
+  position: relative;
+  font-size: 1rem;
+}
+.navbar-links a::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: white;
+  transition: width 0.2s ease;
+}
+.navbar-links a:hover::after {
+  width: 100%;
+}
+.navbar-links a.active::after {
+  width: 100%;
 }
 
 /* About section */
@@ -29,11 +74,6 @@ body {
 .about p {
   margin: 1rem;
 }
-
-/* Link decoration */
-a {
-  color: red;
-}
-a:visited {
+.about p a {
   color: red;
 }
