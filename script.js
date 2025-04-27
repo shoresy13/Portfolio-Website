@@ -1,4 +1,13 @@
 const navLinks = document.querySelectorAll(".navbar-links a");
+const sections = document.querySelectorAll("section");
+
+const disableScroll = () => {
+  document.body.style.overflow = "hidden";
+};
+
+const enableScroll = () => {
+  document.body.style.overflow = "";
+};
 
 document.addEventListener("DOMContentLoaded", () => {
   const aboutLink = document.querySelector('a[href="#about"]');

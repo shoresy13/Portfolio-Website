@@ -11,6 +11,11 @@ body {
   background: rgb(35, 35, 35);
   color: white;
 }
+html,
+body {
+  overflow: hidden;
+  height: 100%;
+}
 
 /* Navbar */
 .navbar {
