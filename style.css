@@ -1,0 +1,33 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Rubik";
+  letter-spacing: 1px;
+}
+
+body {
+  background: rgb(35, 35, 35);
+  color: white;
+}
+
+/* About section */
+.about-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.about {
+  text-align: center;
+}
+.about p {
+  margin: 1rem;
+}
+
+/* Link decoration */
+a {
+  color: red;
+}
+a:visited {
+  color: red;
+}
