@@ -21,13 +21,13 @@ body {
   padding: 1rem;
   position: fixed;
   top: 0;
-  right: 0;
-  width: auto;
+  left: 0;
+  width: 100%;
   z-index: 1000;
 }
 .navbar-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 }
 .navbar-links {
