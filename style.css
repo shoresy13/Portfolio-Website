@@ -5,6 +5,12 @@
   letter-spacing: 1px;
 }
 
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+
 body {
   background: rgb(35, 35, 35);
   color: white;
