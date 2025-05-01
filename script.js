@@ -1,34 +1,67 @@
 const navLinks = document.querySelectorAll(".navbar-links a");
 const sections = document.querySelectorAll("section");
 
-const disableScroll = () => {
-  document.body.style.overflow = "hidden";
-};
+let observer;
+let scrollTimeout;
 
-const enableScroll = () => {
-  document.body.style.overflow = "";
-};
+// Function to start observing sections
+function startObserving() {
+  observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
 
-document.addEventListener("DOMContentLoaded", () => {
-  const aboutLink = document.querySelector('a[href="#about"]');
-  aboutLink.classList.add("active");
+        navLinks.forEach((link) => {
+          link.classList.remove("active");
+          if (link.getAttribute("href") === `#${id}`) {
+            link.classList.add("active");
+          }
+        });
 
-  const targetSection = document.querySelector("#about");
-  targetSection.scrollIntoView({ behavior: "smooth" });
+        history.replaceState(null, "", `#${id}`);
+      }
+    });
+  }, {
+    root: null,
+    rootMargin: "0px",
+    threshold: 0.6,
+  });
 
-  history.replaceState(null, "", "#about");
-});
+  sections.forEach((section) => observer.observe(section));
+}
 
+// Start observing initially
+startObserving();
+
+// Helper: Wait for scroll to stop
+function waitForScrollEnd(callback) {
+  clearTimeout(scrollTimeout);
+  scrollTimeout = setTimeout(callback, 150);
+}
+
+// Click handler with instant feedback
 navLinks.forEach((link) => {
   link.addEventListener("click", function (e) {
     e.preventDefault();
 
+    // Instantly apply active class for visual feedback
     navLinks.forEach((link) => link.classList.remove("active"));
     this.classList.add("active");
 
     const targetSection = document.querySelector(this.getAttribute("href"));
     targetSection.scrollIntoView({ behavior: "smooth" });
 
-    history.pushState(null, "", this.getAttribute("href"));
+    // Pause observer during scroll
+    if (observer) observer.disconnect();
+
+    // Wait for scroll to stop before re-enabling
+    const onScroll = () => {
+      waitForScrollEnd(() => {
+        window.removeEventListener("scroll", onScroll);
+        startObserving(); // Resume observer
+      });
+    };
+
+    window.addEventListener("scroll", onScroll);
   });
 });
